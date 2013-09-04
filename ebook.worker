@@ -5,6 +5,7 @@ exec "ebook.rb"
 
 file "twitter_init.rb"
 file "markov.rb"
+file "data.txt"
 
 gem 'twitter'
 gem 'punkt-segmenter'

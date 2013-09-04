@@ -53,17 +53,8 @@ unless rand_key == 0 || params["force"]
 else
   # Fetch a thousand tweets
   begin
-    user_tweets = Twitter.user_timeline($source_account, :count => 200, :trim_user => true, :exclude_replies => false, :include_rts => false)
-    max_id = user_tweets.last.id
-    source_tweets += filtered_tweets(user_tweets)
-  
-    # Twitter only returns up to 3200 of a user timeline, includes retweets.
-    17.times do
-      user_tweets = Twitter.user_timeline($source_account, :count => 200, :trim_user => true, :max_id => max_id - 1, :exclude_replies => false, :include_rts => false)
-      puts "MAX_ID #{max_id} TWEETS: #{user_tweets.length}"
-      break if user_tweets.last.nil?
-      max_id = user_tweets.last.id
-      source_tweets += filtered_tweets(user_tweets)
+    File.readlines('data.txt').each do |line|
+      source_tweets << line
     end
   rescue
   end
